@@ -4,6 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var machines = require("./models/machines");
+
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var machinesRouter = require('./routes/machines');
@@ -27,6 +37,40 @@ app.use('/users', usersRouter);
 app.use('/machines', machinesRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
+
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+  await machines.deleteMany();
+  let instance1 = new
+  machines({MachineType:"Refrigerator",Capacity:1,useType:"Domestic",Energy:"solar"});
+  instance1.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("First object saved")
+  });
+  let instance2 = new
+  machines({MachineType:"Washing Machine",Capacity:5,useType:"Industrial",Energy:"Electrical"});
+  instance2.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Second object saved")
+  });
+  let instance3 = new
+  machines({MachineType:"Cutting Machine",Capacity:10,useType:"Industrial",Energy:"Electrical"});
+  instance3.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Third object saved")
+  });
+  }
+  let reseed = true;
+  if (reseed) { recreateDB();}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
