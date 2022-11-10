@@ -43,3 +43,15 @@ res.send('NOT IMPLEMENTED: machines delete DELETE ' + req.params.id);
 exports.machines_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: machines update PUT' + req.params.id);
 };
+// VIEWS
+// Handle a show all view
+exports.machines_view_all_Page = async function(req, res) {
+    try{
+    themachines = await machines.find();
+    res.render('machines', { title: 'Machine Search Results', results: themachines });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+};
