@@ -65,4 +65,26 @@ exports.machines_detail = async function(req, res) {
     res.status(500)
     res.send(`{"error": document for id ${req.params.id} not found`);
     }
-    };
+};
+
+// Handle Costume update form on PUT.
+exports.machines_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await machines.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.MachineType)
+    toUpdate.MachineType = req.body.MachineType;
+    if(req.body.Capacity) toUpdate.Capacity = req.body.Capacity;
+    if(req.body.useType) toUpdate.useType = req.body.useType;
+    if(req.body.Energy) toUpdate.Energy = req.body.Energy;
+    let results = await toUpdate.save();
+    console.log("Sucess " + results)
+    res.send(results)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+    }
+};
