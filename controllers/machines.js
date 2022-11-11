@@ -2,8 +2,8 @@ var machines = require('../models/machines');
 // List of all machines
 exports.machines_list = async function(req, res) {
     try{ 
-        machines = await machines.find(); 
-        res.send(machines); 
+        results = await machines.find(); 
+        res.send(results); 
     } 
     catch(err){ 
         res.status(500); 
@@ -55,3 +55,14 @@ exports.machines_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
 };
+// for a specific Costume.
+exports.machines_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    results = await machines.findById( req.params.id)
+    res.send(results)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
