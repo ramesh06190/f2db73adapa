@@ -1,0 +1,24 @@
+extends layout
+block content
+ h1= title
+ - let machinesid = toShow._id
+ - let MachineType = toShow.MachineType
+ - let Capacity = toShow.Capacity
+ - let useType = toShow.useType
+ - let Energy = toShow.Energy
+ div
+  div.row
+   div(class='machinesAttr mr-3') Machine ID is:
+   div #{machinesid}
+  div.row
+   div(class='machinesAttr mr-3') Machine Type is:
+   div #{MachineType}
+  div.row
+   div(class='machinesAttr mr-3') Machine Capacity is:
+   div #{Capacity}
+  div.row
+   div(class='machinesAttr mr-3') Machine use Type is:
+   div #{useType}
+  div.row
+   div(class='machinesAttr mr-3') Machine Energy is:
+   div #{Energy}

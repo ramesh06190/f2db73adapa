@@ -55,7 +55,7 @@ exports.machines_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
 };
-// for a specific Costume.
+// for a specific machine.
 exports.machines_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -67,7 +67,7 @@ exports.machines_detail = async function(req, res) {
     }
 };
 
-// Handle Costume update form on PUT.
+// Handle machine update form on PUT.
 exports.machines_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body
     ${JSON.stringify(req.body)}`)
@@ -98,5 +98,18 @@ exports.machines_delete = async function(req, res) {
     } catch (err) {
     res.status(500)
     res.send(`{"error": Error deleting ${err}}`);
+    }
+};
+// Handle a show one view with id specified by query
+exports.machines_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    results = await machines.findById( req.query.id)
+    res.render('machinesdetail',
+    { title: 'Machines Detail', toShow: results });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
 };
