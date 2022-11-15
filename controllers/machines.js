@@ -88,3 +88,15 @@ exports.machines_update_put = async function(req, res) {
     failed`);
     }
 };
+// Handle machine delete on DELETE.
+exports.machines_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    results = await machines.findByIdAndDelete( req.params.id)
+    console.log("Removed " + results)
+    res.send(results)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+};
