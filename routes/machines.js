@@ -11,5 +11,8 @@ router.get('/detail', machines_controlers.machines_view_one_Page);
 router.get('/create', machines_controlers.machines_create_Page);
 /* GET create update page */
 router.get('/update', machines_controlers.machines_update_Page);
+/* GET delete machine page */
+router.get('/delete', machines_controlers.machines_delete_Page);
+
 
 module.exports = router;

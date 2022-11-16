@@ -139,3 +139,16 @@ exports.machines_update_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
 };
+// Handle a delete one view with id from query
+exports.machines_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    results = await machines.findById(req.query.id)
+    res.render('machinesdelete', { title: 'Machine Delete', toShow:
+    results });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+};

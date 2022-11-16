@@ -24,6 +24,13 @@ block content
     label.machinesAttr(for='Energy') Energy used
     input#Energy(type='text', name='Energy', value= Energy )
   input(type="submit")
+  br
+  button(class="btn btn-secondary m-3" onclick="home()") Home
+ script.
+    function home() {
+        // Go back to the home page for the machines collection
+        window.location.href='/machines'
+    }
  script.
   document.forms['machinesForm'].addEventListener('submit', (event) => {
     event.preventDefault();
