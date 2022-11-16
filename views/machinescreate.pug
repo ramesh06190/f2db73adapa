@@ -1,0 +1,34 @@
+extends layout
+block content
+ h1= title
+ form(id='machinesForm', action="/resource/machines", method="POST")
+  div.form-group
+    label.machinesAttr(for='MachineType') Machine Type
+    input#MachineType(type='text', name='MachineType')
+  div.form-group
+    label.machinesAttr(for='Capacity') Machine Capacity
+    input#Capacity(type='number', name='Capacity')
+  div.form-group
+    label.machinesAttr(for='useType') Machine useType
+    input#useType(type='text', name='useType')
+  div.form-group
+    label.machinesAttr(for='Energy') Energy used
+    input#Energy(type='text', name='Energy')
+  input(type="submit")
+ script.
+    document.forms['machinesForm'].addEventListener('submit', (event) => {
+     event.preventDefault();
+     // TODO do something here to show user that form is being submitted
+     fetch(event.target.action, {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+     }).then((resp) => {
+      return resp.json(); // or resp.text() or whatever the server sends
+     }).then((body) => {
+      alert("Save succeded")
+      // TODO handle body
+     }).catch((error) => {
+      // TODO handle error
+      alert("Save failed " + error )
+     });
+    });

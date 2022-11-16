@@ -1,0 +1,43 @@
+extends layout
+block content
+ h1= title
+ - let machinesid = toShow._id
+ - let MachineType = toShow.MachineType
+ - let Capacity = toShow.Capacity
+ - let useType = toShow.useType
+ - let Energy = toShow.Energy
+ div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{machinesid}
+ - let actionid = "/resource/machines/" + machinesid
+ form(id='machinesForm', action= actionid, method="PUT")
+  div.form-group
+    label.machinesAttr(for='MachineType') Machine type
+    input#MachineType(type='text', name='MachineType', value= MachineType )
+  div.form-group
+    label.machinesAttr(for='Capacity') Machine Capacity
+    input#Capacity(type='number', name='Capacity', value= Capacity )
+  div.form-group
+    label.machinesAttr(for='useType') Machine useType
+    input#useType(type='text', name='useType', value= useType )
+  div.form-group
+    label.machinesAttr(for='Energy') Energy used
+    input#Energy(type='text', name='Energy', value= Energy )
+  input(type="submit")
+ script.
+  document.forms['machinesForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+     method: 'PUT',
+     body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+     return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+     alert("Update succeded")
+     // TODO handle body
+    }).catch((error) => {
+     // TODO handle error
+     alert("Update failed " + error )
+    });
+  });

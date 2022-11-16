@@ -9,5 +9,7 @@ router.get('/', machines_controlers.machines_view_all_Page );
 router.get('/detail', machines_controlers.machines_view_one_Page);
 /* GET create machine page */
 router.get('/create', machines_controlers.machines_create_Page);
+/* GET create update page */
+router.get('/update', machines_controlers.machines_update_Page);
 
 module.exports = router;
