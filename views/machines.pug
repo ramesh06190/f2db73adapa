@@ -7,7 +7,7 @@ block content
     div(class="row m-1")
       each item in machines
         - let destination = `dispatch(\"/machines/update?id=${item._id}\")`
-        div(class="col-sm-2" class="m-1") Machine Type:#{item.MachineType}, Capacity:#{item.Capacity}, useType:#{item.useType}, Energy:#{item.Energy}
+        div(class="row-sm-2" class="m-1") Machine Type:#{item.MachineType}, Capacity:#{item.Capacity}, useType:#{item.useType}, Energy:#{item.Energy}
           br
           button.btn( class="btn-primary ml-1", onclick= destination) Update
   script.
@@ -19,7 +19,7 @@ block content
   div(class="container-fluid")
     div(class="row m-1")
     - for(var i=0;i<machines.length;i++) {
-        div(class="col-sm-2" width="215px" onClick=`buy(${i+1})`) #{machines[i].MachineType}
+        div(class="row-sm-2" width="215px" onClick=`buy(${i+1})`) #{machines[i].MachineType}
     -}
   script. 
     function buy(indexNum) {
