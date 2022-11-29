@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var Account = require('../models/account');
+
 router.get('/', function (req, res) {
   res.render('index', { title: 'Machines App', user : req.user });
 });
@@ -48,13 +49,9 @@ router.get('/ping', function(req, res){
 router.get('/logout', function(req, res, next) {          // use post or delete for better safety
 
   req.logout( function(err) {
-
       if (err) { return next(err);}
-
       res.redirect('/');
-
   });
-
 });
 
 module.exports = router;
