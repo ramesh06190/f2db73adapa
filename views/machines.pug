@@ -4,7 +4,8 @@ block content
   h1= title
   - var machines =results;
   - let creation = `dispatch(\"/machines/create\")`
-  button.btn( class="btn-info ml-1", onclick= creation) Create
+  button.btn( class="btn-primary ml-1", onclick=creation) Create
+
   div(class="container-fluid")
     div(class="row m-1")
       each item in machines
@@ -14,7 +15,7 @@ block content
 
         div(class="row-sm-2" class="m-1") Machine Type:#{item.MachineType}, Capacity:#{item.Capacity}, useType:#{item.useType}, Energy:#{item.Energy}
           br
-          button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= destination) Update 
           button.btn( class="btn-success ml-1", onclick= destination1) Detail View
           button.btn( class="btn-danger ml-1", onclick= destination2) Delete
   script.

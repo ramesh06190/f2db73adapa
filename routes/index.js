@@ -38,7 +38,7 @@ router.post('/register', function(req, res) {
 router.get('/login', function(req, res) {
   res.render('login', { title: 'Machines App Login', user : req.user });
 });
-router.post('/login', passport.authenticate('local'), function(req, res) {
+router.post('/login', passport.authenticate('local',{keepSessionInfo: true}), function(req, res) {
   if(req.session.returnTo){
     res.redirect(req.session.returnTo);}
   res.redirect('/');
@@ -46,12 +46,18 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 router.get('/ping', function(req, res){
   res.status(200).send("pong!");
 });
-router.get('/logout', function(req, res, next) {          // use post or delete for better safety
+router.post('/logout', function(req, res, next) {          // use post or delete for better safety
 
   req.logout( function(err) {
       if (err) { return next(err);}
       res.redirect('/');
   });
 });
+router.get('/logout', function(req, res, next) {         
 
+  req.logout( function(err) {
+      if (err) { return next(err);}
+      res.redirect('/');
+  });
+});
 module.exports = router;

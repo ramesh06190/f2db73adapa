@@ -10,18 +10,16 @@ block content
     input#Capacity(type='number', name='Capacity', min='1', max='15')
   div.form-group
     label.machinesAttr(for='useType') Machine useType
-    input#useType(type='text', name='useType')
+    input#useType(type='text', name='useType', minlength='5', maxlength='15')
   div.form-group
     label.machinesAttr(for='Energy') Energy used
     input#Energy(type='text', name='Energy')
   input(type="submit")
+  br
   button(class="btn btn-secondary m-3" onclick="home()") Home
+     
   script.
-      function home() {
-          // Go back to the home page for the machines collection
-          window.location.href='/machines'
-      }
- script.
+    
     document.forms['machinesForm'].addEventListener('submit', (event) => {
      event.preventDefault();
      // TODO do something here to show user that form is being submitted
@@ -38,3 +36,7 @@ block content
       alert("Save failed " + error )
      });
     });
+    function home() {
+          // Go back to the home page for the machines collection
+          window.location.href='/machines'
+    }
